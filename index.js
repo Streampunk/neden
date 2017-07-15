@@ -21,8 +21,9 @@ var is = (f, ...x) => {
   var deps = {};
   var dpnd = [];
   var fn = undefined;
+  var eff = undefined;
   var ob = function (z, ...p) {
-    if (z && typeof z === 'function') {
+    if (typeof z !== 'undefined' && typeof z === 'function') {
       dpnd.forEach(d => { delete d.deps[id]; });
       dpnd.length = 0;
       p.forEach(q => dpnd.push(q));
@@ -31,9 +32,10 @@ var is = (f, ...x) => {
         v = z.apply(null, p.map(z => z()));
         Object.keys(deps).forEach(x => { deps[x](); });
       };
+      eff = z;
       fn();
       p.forEach(y => { y.deps[id] = fn; });
-    } else if (z) {
+    } else if (typeof z !== 'undefined') {
       dpnd.forEach(d => { delete d.deps[id]; });
       dpnd.length = 0;
       v = z;
@@ -41,16 +43,16 @@ var is = (f, ...x) => {
     }
     return v;
   }
-  if (f && x) {
+  if (typeof f !== 'undefined' && x) {
     var appy = [f];
     x.forEach(e => { appy.push(e); });
     ob.apply(null, appy);
-  } else if (f) {
+  } else if (typeof f !== 'undefined') {
     ob(f);
   }
   ob.deps = deps;
   ob.dpnd = dpnd;
-  ob.fn = fn;
+  ob.f = eff;
   return ob;
 };
 

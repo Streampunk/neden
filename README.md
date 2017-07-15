@@ -1,6 +1,6 @@
 # Neden
 
-Bare bones empirical modelling support for Node.JS, allowing any Javascript value to be established as an observable and Javascript functions to be used to establish a dependency.
+Bare bones [Empirical Modelling](https://en.wikipedia.org/wiki/Empirical_modelling) support for [Node.JS](https://nodejs.org/en/), allowing any Javascript value to be established as an _observable_ and Javascript functions to be used to establish a _dependency_.
 
 ## Installation
 
@@ -73,7 +73,7 @@ var s = eden((x, y) => x + y, a, c);
 Note that you could also do the same assuming with an unbounded argument list:
 
 ```javascript
-var s = eden(...x => x.reduce((y, z) => y + z), a, c);
+var t = eden((...x) => x.reduce((y, z) => y + z), a, c);
 ```
 
 In both cases, the value returned is a function.
@@ -113,9 +113,19 @@ These values can be inspected in the REPL by typing the function name without ca
 
 ```javascript
 a;
-#
+# { [Function: ob]
+#   deps: { '0fdacd4d-9257-42c1-889d-a631507d3172': [Function: fn] },
+#   dpnd: [],
+#   f: undefined }
+
 s;
-#
+# { [Function: ob]
+#   deps: {},
+#   dpnd: [ { [Function: ob] deps: [Object], dpnd: [], fn: undefined } ],
+#   f: [Function] }
+
+s.f.toString();
+# 'x => x - 1'
 ```
 
 ## Status and next steps
