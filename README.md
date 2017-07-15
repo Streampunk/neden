@@ -128,8 +128,24 @@ s.f.toString();
 # 'x => x - 1'
 ```
 
+### Asynchronous behaviour
+
+Neden can be used with Node.JS [promises](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). For example:
+
+```javascript
+var tp = (v, t) => new Promise((f, r) => { setTimeout(f(v), t); });
+var ta = (...x) => Promise.all(x).then(y => y.reduce((x, y) => x + y));
+var a = eden(tp(7, 3000));
+var b = eden(tp(42, 8000));
+var c = eden(ta, a, b);
+c();
+# Promise { <pending> }
+
+# Wait 8 seconds
+c();
+# Promise { 49 }
+```
+
 ## Status and next steps
 
 This is an experimental prototype for research purposes only with no commitment to further development.
-
-The definition function should be extended to support a concept such as promises so that asynchronous behaviours can be defined.
