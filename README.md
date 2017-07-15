@@ -107,7 +107,7 @@ s(null);
 
 Observables and definitions have a property called `deps` which is an object containing a map from the unique internal identifier of any value that depends on this value and the function to call to update the dependent value.
 
-Definitions have a value called `dpnd` which is an array of all the observables that are depended on. They also have a value called `fn` which is the function to call to update the values.
+Definitions have a value called `dpnd` which is an array of all the observables that are depended on. They also have a value called `f` which is the function to call to update the values.
 
 These values can be inspected in the REPL by typing the function name without calling the function, for example:
 
