@@ -21,18 +21,17 @@ var is = (f, ...x) => {
   var deps = {};
   var dpnd = [];
   var fn = undefined;
-  var eff = undefined;
   var ob = function (z, ...p) {
     if (typeof z !== 'undefined' && typeof z === 'function') {
       dpnd.forEach(d => { delete d.deps[id]; });
       dpnd.length = 0;
       p.forEach(q => dpnd.push(q));
       fn = () => {
-        console.log('Evaluating ', z.toString())
+        // console.log('Evaluating ', z.toString())
         v = z.apply(null, p.map(z => z()));
         Object.keys(deps).forEach(x => { deps[x](); });
       };
-      eff = z;
+      ob.f = z;
       fn();
       p.forEach(y => { y.deps[id] = fn; });
     } else if (typeof z !== 'undefined') {
@@ -52,7 +51,6 @@ var is = (f, ...x) => {
   }
   ob.deps = deps;
   ob.dpnd = dpnd;
-  ob.f = eff;
   return ob;
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "neden",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Empirical Modelling for node.js",
   "main": "index.js",
   "scripts": {
