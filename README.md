@@ -149,3 +149,7 @@ c();
 ## Status and next steps
 
 This is an experimental prototype for research purposes only with no commitment to further development.
+
+## License
+
+This specification is released under the Apache 2.0 license. Copyright 2016 Streampunk Media Ltd.
