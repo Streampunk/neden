@@ -39,7 +39,7 @@ a();
 b();
 # true
 c();
-# hello
+# 'hello'
 d();
 # [1, 2, 3]
 ```
@@ -133,7 +133,7 @@ s.f.toString();
 Neden can be used with Node.JS [promises](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). For example:
 
 ```javascript
-var tp = (v, t) => new Promise((f, r) => { setTimeout(f(v), t); });
+var tp = (v, t) => new Promise((f, r) => { setTimeout(() => f(v), t); });
 var ta = (...x) => Promise.all(x).then(y => y.reduce((x, y) => x + y));
 var a = eden(tp(7, 3000));
 var b = eden(tp(42, 8000));
