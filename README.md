@@ -70,7 +70,7 @@ Create a new dependency using a function and the observables that it depends upo
 var s = eden((x, y) => x + y, a, c);
 ```
 
-Note that you could also do the same assuming with an unbounded argument list:
+Note that you could also do the same assuming an unbounded argument list:
 
 ```javascript
 var t = eden((...x) => x.reduce((y, z) => y + z), a, c);
